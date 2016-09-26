@@ -1,7 +1,10 @@
 $(document).ready(function() {
 // create empty employee array where submitted info will be stored
+// could be an employee object as well (might work better)
   var employee = [];
-// create variable for total
+// create variable for total, make sure to initialize to zero
+// scope that's local to entire file (almost global variable, but not quite)
+// if variables are put into the anonymous function below, it's not going to work properly
   var total = 0;
 
 // prevents submission info to populate in address bar
@@ -15,7 +18,9 @@ $(document).ready(function() {
     });
     console.log('employee object', employee);
 // removes submitted info from fields when submit button is clicked
+    //$('#employeeInfo').find('input[type=text], [type=number]').val('');
     $('#employeeInfo').find('input[type=text]').val('');
+
 // calls function to append employee information to the DOM
     appendDom(employee);
   });
@@ -25,6 +30,7 @@ $(document).ready(function() {
 // creates empty div for employee information
     var $emp = $('<tr class="employee"></tr>');
 // table cells containing employee info are created, also delete button
+// this can be broken into separate lines to help with readability
     $emp.append('<td>' + emp.empFirstName + '</td>' + '<td>' + emp.empLastName + '</td>' + '<td>' + emp.empId + '</td>' + '<td>' + emp.title + '</td>' + '<td class="salary">' + emp.salary+ '</td>' + '<td><button id="delete">Delete</button></td>');
 
 // employee data paragraph is appended to the empty div
