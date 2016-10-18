@@ -23,10 +23,10 @@
           <input type="text" id="title" name="title" ng-model="basic.employee.title" />
           <br />
           <label for="salary">Annual Salary:</label>
-          <input type="text" id="salary" name="salary" ng-model="basic.employee.salary" />
+          <input type="number" id="salary" name="salary" ng-model="basic.employee.salary" />
           <button type="submit" id="submit" ng-click="basic.createEmployee()">Submit</button>
         </form>
-        <div id="employeeList">
+        <div id="employeeList" ng-model="basic.employeeList">
         <h1>Employee List</h1>
         <table id="empData">
           <tr id="headings">
@@ -35,18 +35,19 @@
             <th>ID</th>
             <th>Title</td>
             <th>Annual Salary</th>
+            <th>Delete</th>
           </tr>
-          <tr>
-            <td ng-repeat="employee in basic.employees">{{ employee.first_name }}</td>
-            <td ng-repeat="employee in basic.employees">{{ employee.last_name }}</td>
-            <td ng-repeat="employee in basic.employees">{{ employee.id }}</td>
-            <td ng-repeat="employee in basic.employees">{{ employee.title }}</td>
-            <td ng-repeat="employee in basic.employees">{{ employee.salary }}</td>
+          <tr ng-repeat="employee in basic.employees">
+            <td>{{ employee.first_name }}</td>
+            <td>{{ employee.last_name }}</td>
+            <td>{{ employee.id }}</td>
+            <td>{{ employee.title }}</td>
+            <td>{{ employee.salary | number }}</td>
+            <td><button id="deleteBtn" ng-click="basic.deleteEmployee($index)">Delete</button></td>
           </tr>
         </table>
-        <!--<p>Monthly Salary Expenditures: <span id="monthlysalary">0</span></p>  -->
         <h3>Monthly Salary Expenditures:</h3>
-          <p>{{ self.expenditure }}</p>
+          <p>{{ basic.expenditure / 12 | number:2 }}</p>
       </div>
       </div>
       </section>
